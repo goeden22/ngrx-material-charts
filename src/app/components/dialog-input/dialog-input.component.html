@@ -1,0 +1,43 @@
+<div class="app-primary">
+  <h2 mat-dialog-title>Add Entry</h2>
+  <form class="example-container" [formGroup]="entryForm" (ngSubmit)="onSubmit()">
+<mat-dialog-content>
+ 
+    <p>
+      <mat-form-field appearance="legacy">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Enter Name" formControlName="name">
+        <mat-error *ngIf="entryForm.get('name').hasError('required')">Please enter name</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      
+    </p>
+    <p>
+      <mat-form-field appearance="fill">
+        <mat-label>Value</mat-label>
+        <input matInput placeholder="Enter Value" formControlName="value" maxlength="10" (input)="numberValidate('value')">
+        <mat-error *ngIf="entryForm.get('value').hasError('required')">Please enter value</mat-error>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="fill"  class="colorPick">
+        <mat-label [style.color]="entryForm.get('color').value">Color</mat-label>
+        <mat-select formControlName="color" >
+          <mat-option value="red">Red</mat-option>
+          <mat-option value="blue">Primary</mat-option>
+        </mat-select>
+        <div class="colorView" [style.background-color]="entryForm.get('color').value"></div>
+      </mat-form-field>
+      
+    </p>
+    
+ 
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-between flex-nowrap">
+    <button type="submit" mat-raised-button class="w50">Add</button> 
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button  mat-raised-button color="primary" [mat-dialog-close]="true" class="w50">Cancel</button>
+</mat-dialog-actions>
+</form>
+</div>

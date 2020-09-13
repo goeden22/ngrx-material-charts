@@ -1,14 +1,38 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StoreModule } from '@ngrx/store'; 
+
+import { ChartsReducer } from './reducers/charts.reducer';
+
 import { AppComponent } from './app.component';
+import { ChartsComponent } from './components/charts/charts.component';
+import { ChartsEntryComponent } from './components/charts-entry/charts-entry.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MaterialModule} from './material/material.module';
+import { DialogInputComponent } from './components/dialog-input/dialog-input.component'
+
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ChartsComponent,
+    ChartsEntryComponent,
+    DialogInputComponent
   ],
+  entryComponents: [DialogInputComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    MaterialModule,
+    ReactiveFormsModule,
+   StoreModule.forRoot({
+     charts: ChartsReducer
+   }),
+   BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
