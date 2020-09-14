@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Entry } from '../../models/entry.model';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-dialog-input',
@@ -7,6 +9,8 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
   styleUrls: ['./dialog-input.component.scss']
 })
 export class DialogInputComponent implements OnInit {
+ 
+
   entryForm = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -17,9 +21,10 @@ export class DialogInputComponent implements OnInit {
     ])
   })
 
+  onAdd: EventEmitter<Entry> = new EventEmitter();
+
   defaultColor: String = 'red'
 
-  selected: String
   constructor() {
     
   }
@@ -38,8 +43,11 @@ export class DialogInputComponent implements OnInit {
   }
   onSubmit(){
     if(this.validate()){
-      console.log(this.entryForm.value)
+      let newEntry = this.entryForm.value
+      newEntry.id = uuid();
+      this.onAdd.emit(newEntry);
     }
+    
   }
 
 }

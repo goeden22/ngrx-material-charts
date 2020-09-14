@@ -5,9 +5,5 @@
     <button mat-button (click)="deleteEntry(entry.id)">x</button>
   </li>
   <button mat-raised-button (click)="openDialog()" color="primary">Add Entry</button>
-  <form (ngSubmit)="addEntry()">
-    <input type="text" [(ngModel)]="newEntry.name" placeholder="Name" name="entry Name"/>
-    <input type="number" [(ngModel)]="newEntry.value" placeholder="Value" name="entry Value"/>
-    <button type="submit" >+</button>
-  </form>
+  
 </ul>

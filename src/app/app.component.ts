@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { v4 as uuid } from 'uuid';
 
 import { Entry } from './models/entry.model';
 import { AppState } from './models/app-state.model';
@@ -19,8 +18,6 @@ import { DialogInputComponent } from './components/dialog-input/dialog-input.com
 export class AppComponent {
     entries: Observable<Array<Entry>>
 
-    newEntry: Entry = {id: '', name: "", value: 0}
-
     constructor(private store: Store<AppState>, public dialog: MatDialog){
       
     }
@@ -28,20 +25,19 @@ export class AppComponent {
       let dialogConfig = new MatDialogConfig();
 
       dialogConfig.data = {
-        boom: () => {alert('boom')}
+        boom: () => {alert('boom')},
+        colors: ['red','green','blue','purple']
       }
-      this.dialog.open(DialogInputComponent, dialogConfig)
+
+      //czekamy na event z dialogInput wywolywany submitowaniem formularza
+      let dialogRef = this.dialog.open(DialogInputComponent, dialogConfig)
+      dialogRef.componentInstance.onAdd.subscribe((newEntry) => {
+        this.store.dispatch(new AddEntryAction(newEntry))
+      })
     }
     ngOnInit() {
       this.entries = this.store.select(store => store.charts);
       
-    }
-    addEntry(){
-      this.newEntry.id = uuid();
-
-      this.store.dispatch(new AddEntryAction(this.newEntry))
-
-      this.newEntry = {id: '', name: "", value: 0}
     }
 
     deleteEntry(id: string) {

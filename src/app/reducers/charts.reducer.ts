@@ -6,11 +6,13 @@ const initialState: Array<Entry> = [
     id: "dsadasd2321",
     name: "Paliwo",
     value: 123,
+    color: 'red'
   },
   {
     id: "23sdrtyyr1",
     name: "Czynsz",
     value: 700,
+    color: 'red'
   }
 ];
 
