@@ -1,5 +1,8 @@
 <ul>
-  <li *ngFor="let entry of entries | async">
+    <h2>{{this.sum}}</h2>
+    <app-charts [entries]=entries [sum]=sum></app-charts>
+  <li *ngFor="let entry of entries">
+    
     <h3>{{entry.name}}</h3>
     <h5>{{entry.value}}</h5>
     <button mat-button (click)="deleteEntry(entry.id)">x</button>

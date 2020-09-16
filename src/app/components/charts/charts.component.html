@@ -1,3 +1,7 @@
 <div class="charts__container">
-    <h3>charts</h3>
+    <h2>{{this.sum}}</h2>
+        <div *ngFor="let entry of entries" class="charts__wrap">
+            
+            <app-charts-entry [percentTest]='25'></app-charts-entry>
+    </div>
 </div>

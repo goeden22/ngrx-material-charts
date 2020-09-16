@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
+
 import { Entry } from './models/entry.model';
 import { AppState } from './models/app-state.model';
 import { AddEntryAction, DeleteEntryAction } from './actions/charts.actions';
@@ -16,7 +17,8 @@ import { DialogInputComponent } from './components/dialog-input/dialog-input.com
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    entries: Observable<Array<Entry>>
+    entries: any
+    sum: number
 
     constructor(private store: Store<AppState>, public dialog: MatDialog){
       
@@ -36,7 +38,13 @@ export class AppComponent {
       })
     }
     ngOnInit() {
-      this.entries = this.store.select(store => store.charts);
+     
+      this.store.select<any>('charts').subscribe(state => {
+        this.entries = state.data;
+        this.sum = state.sum
+      })
+      
+
       
     }
 

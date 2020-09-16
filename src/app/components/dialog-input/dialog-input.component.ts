@@ -44,6 +44,7 @@ export class DialogInputComponent implements OnInit {
   onSubmit(){
     if(this.validate()){
       let newEntry = this.entryForm.value
+      newEntry.value = parseInt(newEntry.value)
       newEntry.id = uuid();
       this.onAdd.emit(newEntry);
     }

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Entry } from '../../models/entry.model';
 
 @Component({
   selector: 'app-charts',
@@ -6,10 +8,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./charts.component.scss']
 })
 export class ChartsComponent implements OnInit {
+  @Input() entries: Observable<Array<Entry>>
+  @Input() sum: number
+  
+ 
 
-  constructor() { }
+  constructor() {
+
+  }
 
   ngOnInit(): void {
+    console.log(this.entries)
+  }
+  calculateSum(){
   }
 
 }
