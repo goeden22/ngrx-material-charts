@@ -6,7 +6,10 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./charts-entry.component.scss']
 })
 export class ChartsEntryComponent implements OnInit {
-  @Input() percentTest: string
+  @Input() sum: number
+  @Input() color:string
+  @Input() value: number
+  @Input() prevValue: number
 
 
   circ: number;
@@ -23,7 +26,7 @@ export class ChartsEntryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.percent = this.percentTest;
+    this.percent = this.calculatePercent().toString();
     this.calculateOffset();
   
   }
@@ -36,6 +39,9 @@ export class ChartsEntryComponent implements OnInit {
     this.strokeDasharray = `${circ} ${circ}`
     this.strokeDashoffset = offset
    
+  }
+  calculatePercent(){
+    return (this.value/this.sum) * 100
   }
 
 }

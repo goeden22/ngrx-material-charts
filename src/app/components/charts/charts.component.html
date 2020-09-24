@@ -1,7 +1,7 @@
 <div class="charts__container">
-    <h2>{{this.sum}}</h2>
+        <h2>{{this.calculatedSum}}</h2>
         <div *ngFor="let entry of entries" class="charts__wrap">
             
-            <app-charts-entry [percentTest]='25'></app-charts-entry>
+            <app-charts-entry [prevValue]='this.prevValue(2)'[value]=entry.value [color]='entry.color' [sum]='this.sum'></app-charts-entry>
     </div>
 </div>

@@ -2,19 +2,19 @@ import { ChartsActionTypes, ChartsAction } from '../actions/charts.actions';
 import { Entry } from '../models/entry.model';
 
 const initialState = {
-  sum: 823,
+  sum: 100,
   data: [
     {
       id: "dsadasd2321",
       name: "Paliwo",
-      value: 123,
+      value: 75,
       color: 'red'
     },
     {
       id: "23sdrtyyr1",
       name: "Czynsz",
-      value: 700,
-      color: 'red'
+      value: 25,
+      color: 'blue'
     }
   ]
  
@@ -25,7 +25,9 @@ export function ChartsReducer(state = initialState, action: ChartsAction) {
     case ChartsActionTypes.ADD_ENTRY:
       return {
         sum: state.sum + action.payload.value,
-        data: [...state.data, action.payload]
+        data: [...state.data, action.payload].sort((a,b) => {
+          return b.value - a.value
+        })
       }
       case ChartsActionTypes.DELETE_ENTRY:
       return {
