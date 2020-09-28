@@ -1,7 +1,7 @@
 <div class="charts__container">
-        <h2>{{this.calculatedSum}}</h2>
-        <div *ngFor="let entry of entries" class="charts__wrap">
-            
-            <app-charts-entry [prevValue]='this.prevValue(2)'[value]=entry.value [color]='entry.color' [sum]='this.sum'></app-charts-entry>
+        <h2 class="charts__counter">{{this.calculatedSum}}</h2>
+        <div *ngFor="let entry of entries; let i = index" class="charts__wrap">
+       
+            <app-charts-entry [calculatedPercent]='this.calculatePercent(i)'[value]=entry.value [color]='entry.color' [sum]='this.sum'></app-charts-entry>
     </div>
 </div>

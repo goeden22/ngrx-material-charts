@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-charts-entry',
@@ -9,7 +9,7 @@ export class ChartsEntryComponent implements OnInit {
   @Input() sum: number
   @Input() color:string
   @Input() value: number
-  @Input() prevValue: number
+  @Input() calculatedPercent: number
 
 
   circ: number;
@@ -30,6 +30,13 @@ export class ChartsEntryComponent implements OnInit {
     this.calculateOffset();
   
   }
+    //metoda triggerowana przy zmianie inputu
+  ngOnChanges(changes: SimpleChanges){
+    if (changes.calculatedPercent){
+      this.percent = changes.calculatedPercent.currentValue;
+      this.calculateOffset();
+    }
+  }
 
   calculateOffset(){
     let circ = Math.floor(this.radius * 3.14 * 2)
@@ -37,11 +44,18 @@ export class ChartsEntryComponent implements OnInit {
     console.log(offset)
    
     this.strokeDasharray = `${circ} ${circ}`
-    this.strokeDashoffset = offset
+    this.strokeDashoffset = offset +20
+    setTimeout(() => {
+
+      this.strokeDashoffset = offset
+    }, 50);
+
+
    
   }
   calculatePercent(){
-    return (this.value/this.sum) * 100
+    return this.calculatedPercent
+   // return (this.value/this.sum) * 100
   }
 
 }

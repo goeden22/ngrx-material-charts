@@ -13,8 +13,14 @@ const initialState = {
     {
       id: "23sdrtyyr1",
       name: "Czynsz",
-      value: 25,
+      value: 50,
       color: 'blue'
+    },
+    {
+      id: "dawdwad",
+      name: "Czynsz",
+      value: 25,
+      color: 'green'
     }
   ]
  
