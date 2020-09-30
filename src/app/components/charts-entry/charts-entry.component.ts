@@ -44,16 +44,12 @@ export class ChartsEntryComponent implements OnInit {
     console.log(offset)
    
     this.strokeDasharray = `${circ} ${circ}`
-    this.strokeDashoffset = offset +20
-    setTimeout(() => {
-
-      this.strokeDashoffset = offset
-    }, 50);
-
+    this.strokeDashoffset = offset 
+  
 
    
   }
-  calculatePercent(){
+  calculatePercent(): number{
     return this.calculatedPercent
    // return (this.value/this.sum) * 100
   }

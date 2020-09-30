@@ -1,0 +1,9 @@
+table{
+    width: 500px;
+}
+.table{
+    &__colorSample{
+        height: 20px;
+        width: 20px;
+    }
+}
