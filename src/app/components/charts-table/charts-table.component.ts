@@ -1,5 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Entry } from '../../models/entry.model';
+
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog'
+
+import { EditDialogComponent } from '../edit-dialog/edit-dialog.component'
 
 @Component({
   selector: 'app-charts-table',
@@ -8,14 +12,32 @@ import { Entry } from '../../models/entry.model';
 })
 export class ChartsTableComponent implements OnInit {
 
+  @Output() deleteInput: EventEmitter<string> = new EventEmitter()
   @Input() dataSource:  Array<Entry>
-  displayedColumns: string[] = ['name','value','color','delete'];
+  displayedColumns: string[] = ['name','value','color','delete','edit'];
 
-
-  constructor() { }
-
+  constructor(public dialog: MatDialog) { }
   ngOnInit(): void {
+  }
 
+  openEditDialog(input){
+    let dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+      input,
+      colors: ['red','green','blue','purple']
+    }
+
+    //czekamy na event z dialogInput wywolywany submitowaniem formularza
+    let dialogRef = this.dialog.open(EditDialogComponent, dialogConfig)
+
+  }
+
+
+
+  onDelete(id){
+    this.deleteInput.emit(id)
+    
   }
 
 }

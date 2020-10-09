@@ -1,13 +1,13 @@
 <div class="div">
   <app-charts [entries]=entries [sum]=sum></app-charts>
-  <app-charts-table [dataSource]=entries></app-charts-table>
+  <app-charts-table (deleteInput)=deleteInput($event) [dataSource]=entries></app-charts-table>
 <!--<li *ngFor="let entry of entries">
   
   <h3>{{entry.name}}</h3>
   <h5>{{entry.value}}</h5>
   <button mat-button (click)="deleteEntry(entry.id)">x</button>
 </li> -->
-<button mat-raised-button (click)="openDialog()" color="primary">Add Entry</button>
+<button mat-raised-button (click)="openAddDialog()" color="primary">Add Entry</button>
 
 
 </div>

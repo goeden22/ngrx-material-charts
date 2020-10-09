@@ -13,7 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MaterialModule} from './material/material.module';
 import { DialogInputComponent } from './components/dialog-input/dialog-input.component';
-import { ChartsTableComponent } from './components/charts-table/charts-table.component'
+import { ChartsTableComponent } from './components/charts-table/charts-table.component';
+import { EditDialogComponent } from './components/edit-dialog/edit-dialog.component'
 
 
 
@@ -23,7 +24,8 @@ import { ChartsTableComponent } from './components/charts-table/charts-table.com
     ChartsComponent,
     ChartsEntryComponent,
     DialogInputComponent,
-    ChartsTableComponent
+    ChartsTableComponent,
+    EditDialogComponent
   ],
   entryComponents: [DialogInputComponent],
   imports: [

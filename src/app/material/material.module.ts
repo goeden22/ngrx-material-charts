@@ -16,6 +16,7 @@ const MaterialComponents = [
   MatSelectModule,
   MatIconModule,
   MatTableModule
+  
 ]
 
 @NgModule({

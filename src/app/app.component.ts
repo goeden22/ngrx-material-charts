@@ -23,7 +23,7 @@ export class AppComponent {
     constructor(private store: Store<AppState>, public dialog: MatDialog){
       
     }
-    openDialog(){
+    openAddDialog(){
       let dialogConfig = new MatDialogConfig();
 
       dialogConfig.data = {
@@ -48,7 +48,7 @@ export class AppComponent {
       
     }
 
-    deleteEntry(id: string) {
+    deleteInput(id: string) {
       this.store.dispatch(new DeleteEntryAction(id));
     }
 }
