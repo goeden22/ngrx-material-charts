@@ -13,6 +13,7 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component'
 export class ChartsTableComponent implements OnInit {
 
   @Output() deleteInput: EventEmitter<string> = new EventEmitter()
+  @Output() editInput: EventEmitter<Entry> = new EventEmitter()
   @Input() dataSource:  Array<Entry>
   displayedColumns: string[] = ['name','value','color','delete','edit'];
 
@@ -31,9 +32,12 @@ export class ChartsTableComponent implements OnInit {
     //czekamy na event z dialogInput wywolywany submitowaniem formularza
     let dialogRef = this.dialog.open(EditDialogComponent, dialogConfig)
 
+    dialogRef.componentInstance.onEdit.subscribe((editedEntry) => {
+      this.editInput.emit(editedEntry)
+      
+    })
+
   }
-
-
 
   onDelete(id){
     this.deleteInput.emit(id)

@@ -1,6 +1,6 @@
 <div class="div">
   <app-charts [entries]=entries [sum]=sum></app-charts>
-  <app-charts-table (deleteInput)=deleteInput($event) [dataSource]=entries></app-charts-table>
+  <app-charts-table (deleteInput)=deleteInput($event) (editInput)=editInput($event) [dataSource]=entries></app-charts-table>
 <!--<li *ngFor="let entry of entries">
   
   <h3>{{entry.name}}</h3>

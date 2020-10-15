@@ -23,8 +23,7 @@ export class EditDialogComponent implements OnInit {
       Validators.required,
     ])
   })
-
-  onAdd: EventEmitter<Entry> = new EventEmitter();
+  onEdit: EventEmitter<Entry> = new EventEmitter();
 
   defaultColor: String = 'red'
 
@@ -53,7 +52,8 @@ export class EditDialogComponent implements OnInit {
     if(this.validate()){
       let newEntry = this.entryForm.value
       newEntry.value = parseInt(newEntry.value)
-      this.onAdd.emit(newEntry);
+      newEntry.id = this.data.input.id
+      this.onEdit.emit(newEntry)
     }
     
   }

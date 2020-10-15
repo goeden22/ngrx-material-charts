@@ -23,7 +23,7 @@ const initialState = {
       color: 'green'
     }
   ]
- 
+
 };
 
 export function ChartsReducer(state = initialState, action: ChartsAction) {
@@ -31,15 +31,28 @@ export function ChartsReducer(state = initialState, action: ChartsAction) {
     case ChartsActionTypes.ADD_ENTRY:
       return {
         sum: state.sum + action.payload.value,
-        data: [...state.data, action.payload].sort((a,b) => {
+        data: [...state.data, action.payload].sort((a, b) => {
           return b.value - a.value
         })
       }
-      case ChartsActionTypes.DELETE_ENTRY:
+    case ChartsActionTypes.DELETE_ENTRY:
       return {
         sum: state.sum - state.data.find(el => el.id == action.payload).value,
         data: state.data.filter(entry => entry.id !== action.payload)
       }
+    case ChartsActionTypes.EDIT_ENTRY:
+      
+      return {
+        sum: state.sum - state.data.find(el => el.id == action.payload.id).value + action.payload.value,
+        data: state.data.map(el => {
+          if (el.id === action.payload.id){
+            return action.payload
+          } else {
+            return el
+          }
+        })
+      }
+
     default:
       return state;
   }

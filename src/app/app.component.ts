@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { Entry } from './models/entry.model';
 import { AppState } from './models/app-state.model';
-import { AddEntryAction, DeleteEntryAction } from './actions/charts.actions';
+import { AddEntryAction, DeleteEntryAction, EditEntryAction } from './actions/charts.actions';
 
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog'
 
@@ -27,7 +27,6 @@ export class AppComponent {
       let dialogConfig = new MatDialogConfig();
 
       dialogConfig.data = {
-        boom: () => {alert('boom')},
         colors: ['red','green','blue','purple']
       }
 
@@ -44,11 +43,12 @@ export class AppComponent {
         this.sum = state.sum
       })
       
-
-      
     }
 
     deleteInput(id: string) {
       this.store.dispatch(new DeleteEntryAction(id));
+    }
+    editInput(editedInput: Entry){
+      this.store.dispatch(new EditEntryAction(editedInput));
     }
 }
