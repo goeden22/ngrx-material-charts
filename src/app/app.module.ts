@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store'; 
 
 import { ChartsReducer } from './reducers/charts.reducer';
+import {reducers} from './reducers'
 
 import { AppComponent } from './app.component';
 import { ChartsComponent } from './components/charts/charts.component';
@@ -33,9 +34,7 @@ import { EditDialogComponent } from './components/edit-dialog/edit-dialog.compon
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-   StoreModule.forRoot({
-     charts: ChartsReducer
-   }),
+   StoreModule.forRoot(reducers),
    BrowserAnimationsModule
   ],
   providers: [],

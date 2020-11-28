@@ -1,8 +1,15 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog'
+
 import { Entry } from '../../models/entry.model';
+import { Color } from '../../models/color.model';
+import { colorPalette} from '../../themes/colors'
+import { AppState } from '../../reducers';
 
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog'
-
+import { AddEntryAction, DeleteEntryAction, EditEntryAction } from '../../actions/charts.actions';
+import { DeleteColorAction, AddColorAction } from '../../actions/color.actions';
 import { EditDialogComponent } from '../edit-dialog/edit-dialog.component'
 
 @Component({
@@ -12,36 +19,42 @@ import { EditDialogComponent } from '../edit-dialog/edit-dialog.component'
 })
 export class ChartsTableComponent implements OnInit {
 
-  @Output() deleteInput: EventEmitter<string> = new EventEmitter()
-  @Output() editInput: EventEmitter<Entry> = new EventEmitter()
-  @Input() dataSource:  Array<Entry>
-  displayedColumns: string[] = ['name','value','color','delete','edit'];
+  @Input() dataSource: Array<Entry>
+  displayedColumns: string[] = ['name', 'value', 'color', 'delete', 'edit'];
+  colors: Array<Color> = colorPalette
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private store: Store<AppState>, public dialog: MatDialog) { }
+
   ngOnInit(): void {
+   
   }
 
-  openEditDialog(input){
+  //EDIT DIALOG
+  openEditDialog(input) {
     let dialogConfig = new MatDialogConfig();
 
+    this.store.select('colors').subscribe(state => {
+      this.colors = state
+    })
     dialogConfig.data = {
       input,
-      colors: ['red','green','blue','purple']
+      colors: this.colors
     }
 
-    //czekamy na event z dialogInput wywolywany submitowaniem formularza
     let dialogRef = this.dialog.open(EditDialogComponent, dialogConfig)
+    //czekamy na event z EventInput wywolywany submitowaniem formularza
+    dialogRef.componentInstance.onEdit.subscribe((editedEntry: Entry) => {
+      this.store.dispatch(new EditEntryAction(editedEntry));
 
-    dialogRef.componentInstance.onEdit.subscribe((editedEntry) => {
-      this.editInput.emit(editedEntry)
-      
     })
 
   }
-
-  onDelete(id){
-    this.deleteInput.emit(id)
-    
+  //DELETE
+  onDelete(id: string) {
+    this.store.dispatch(new AddColorAction(this.dataSource.find(el => {
+      return el.id === id
+     }).color))
+    this.store.dispatch(new DeleteEntryAction(id));
   }
 
 }

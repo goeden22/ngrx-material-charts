@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Entry } from '../../models/entry.model';
+import { Color } from '../../models/color.model';
 
 
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -24,7 +25,7 @@ export class EditDialogComponent implements OnInit {
     ])
   })
   onEdit: EventEmitter<Entry> = new EventEmitter();
-
+  colors: Array<Color>
   defaultColor: String = 'red'
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
@@ -41,17 +42,21 @@ export class EditDialogComponent implements OnInit {
     return !this.entryForm.controls['name'].errors && !this.entryForm.controls['value'].errors
   }
   ngOnInit(): void {
-    this.entryForm.get('color').setValue(this.defaultColor);
+   this.colors = [this.data.input.color, ...this.data.colors]
     this.entryForm.setValue({
    name: this.data.input.name,
-   color: this.data.input.color,
+   color: this.data.input.color.value,
    value: this.data.input.value,
     });
+   
   }
   onSubmit(){
     if(this.validate()){
       let newEntry = this.entryForm.value
       newEntry.value = parseInt(newEntry.value)
+      newEntry.color = this.colors[this.colors.findIndex(cl => {
+        return cl.value === this.entryForm.get('color').value
+      })]
       newEntry.id = this.data.input.id
       this.onEdit.emit(newEntry)
     }

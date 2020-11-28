@@ -1,32 +1,37 @@
 import { ChartsActionTypes, ChartsAction } from '../actions/charts.actions';
 import { Entry } from '../models/entry.model';
 
-const initialState = {
+export interface chartsInterface {
+  sum: number,
+  data: Array<Entry>
+}
+
+export const ChartsState : chartsInterface = {
   sum: 100,
   data: [
     {
       id: "dsadasd2321",
       name: "Paliwo",
       value: 75,
-      color: 'red'
+      color: {name: 'Red', value: "#ff414d"}
     },
     {
       id: "23sdrtyyr1",
       name: "Czynsz",
       value: 50,
-      color: 'blue'
+      color: {name:'Mint Green', value: '#49dcb1'}
     },
     {
       id: "dawdwad",
       name: "Czynsz",
       value: 25,
-      color: 'green'
+      color: {name: 'Yellow', value: "#ffd246"}
     }
   ]
 
 };
 
-export function ChartsReducer(state = initialState, action: ChartsAction) {
+export function ChartsReducer(state = ChartsState, action: ChartsAction) {
   switch (action.type) {
     case ChartsActionTypes.ADD_ENTRY:
       return {

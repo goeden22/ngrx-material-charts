@@ -1,7 +1,10 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Entry } from '../../models/entry.model';
+import { Color } from '../../models/color.model';
 import { v4 as uuid } from 'uuid';
+
+import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-input',
@@ -22,10 +25,9 @@ export class DialogInputComponent implements OnInit {
   })
 
   onAdd: EventEmitter<Entry> = new EventEmitter();
+  colors: Array<Color>
 
-  defaultColor: String = 'red'
-
-  constructor() {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     
   }
   numberValidate(controlField){
@@ -39,12 +41,19 @@ export class DialogInputComponent implements OnInit {
     return !this.entryForm.controls['name'].errors && !this.entryForm.controls['value'].errors
   }
   ngOnInit(): void {
-    this.entryForm.get('color').setValue(this.defaultColor);
+    this.colors = this.data.colors
+    this.entryForm.get('color').setValue(this.colors[0].value);
+ 
+
   }
   onSubmit(){
+
     if(this.validate()){
       let newEntry = this.entryForm.value
       newEntry.value = parseInt(newEntry.value)
+      newEntry.color = this.colors[this.colors.findIndex(cl => {
+        return cl.value === this.entryForm.get('color').value
+      })]
       newEntry.id = uuid();
       this.onAdd.emit(newEntry);
     }

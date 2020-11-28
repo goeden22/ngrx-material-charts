@@ -20,7 +20,7 @@
   <ng-container matColumnDef="color">
     <th mat-header-cell *matHeaderCellDef> Color </th>
     <td mat-cell *matCellDef="let element">
-      <div class="table__colorSample" [ngStyle]="{'background-color' : element.color}"></div>
+      <div class="table__colorSample" [ngStyle]="{'background-color' : element.color.value}"></div>
     </td>
   </ng-container>
 
