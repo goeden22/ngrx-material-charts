@@ -42,11 +42,11 @@ export class EditDialogComponent implements OnInit {
     return !this.entryForm.controls['name'].errors && !this.entryForm.controls['value'].errors
   }
   ngOnInit(): void {
-   this.colors = [this.data.input.color, ...this.data.colors]
+   this.colors = [this.data.current.color, ...this.data.colors]
     this.entryForm.setValue({
-   name: this.data.input.name,
-   color: this.data.input.color.value,
-   value: this.data.input.value,
+   name: this.data.current.name,
+   color: this.data.current.color.value,
+   value: this.data.current.value,
     });
    
   }
@@ -57,7 +57,7 @@ export class EditDialogComponent implements OnInit {
       newEntry.color = this.colors[this.colors.findIndex(cl => {
         return cl.value === this.entryForm.get('color').value
       })]
-      newEntry.id = this.data.input.id
+      newEntry.id = this.data.current.id
       this.onEdit.emit(newEntry)
     }
     

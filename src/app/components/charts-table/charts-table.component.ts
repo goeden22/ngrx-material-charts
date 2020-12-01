@@ -29,23 +29,25 @@ export class ChartsTableComponent implements OnInit {
    
   }
 
-  //EDIT DIALOG
-  openEditDialog(input) {
+  //EDIT
+  openEditDialog(current: Entry) {
     let dialogConfig = new MatDialogConfig();
-
+    //set colors from store
     this.store.select('colors').subscribe(state => {
       this.colors = state
     })
+    //set dialog data
     dialogConfig.data = {
-      input,
+      current, //edited input
       colors: this.colors
     }
-
     let dialogRef = this.dialog.open(EditDialogComponent, dialogConfig)
-    //czekamy na event z EventInput wywolywany submitowaniem formularza
+    //waiting for onEdit event from dialog
     dialogRef.componentInstance.onEdit.subscribe((editedEntry: Entry) => {
       this.store.dispatch(new EditEntryAction(editedEntry));
-
+      this.store.dispatch(new AddColorAction(current.color))
+      this.store.dispatch(new DeleteColorAction(editedEntry.color.value))
+      dialogRef.close()
     })
 
   }

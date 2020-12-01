@@ -33,6 +33,7 @@ export class ChartsEntryComponent implements OnInit {
     //metoda triggerowana przy zmianie inputu
   ngOnChanges(changes: SimpleChanges){
     if (changes.calculatedPercent){
+    
       this.percent = changes.calculatedPercent.currentValue;
       this.calculateOffset();
     }
@@ -41,7 +42,7 @@ export class ChartsEntryComponent implements OnInit {
   calculateOffset(){
     let circ = Math.floor(this.radius * 3.14 * 2)
     let offset = circ - (parseInt(this.percent) / 100) * circ;
-    console.log(offset)
+ 
    
     this.strokeDasharray = `${circ} ${circ}`
     this.strokeDashoffset = offset 

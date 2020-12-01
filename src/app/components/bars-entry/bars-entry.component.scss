@@ -1,0 +1,10 @@
+.bars{
+    &__value{
+        position: absolute;
+        bottom: -20px;
+        margin:0;
+    }
+    &__bar{
+        transition: height 500ms;
+    }
+}
