@@ -6,6 +6,8 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTableModule} from '@angular/material/table';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatCardModule} from '@angular/material/card';
 
 
 const MaterialComponents = [
@@ -15,7 +17,10 @@ const MaterialComponents = [
   MatInputModule,
   MatSelectModule,
   MatIconModule,
-  MatTableModule
+  MatTableModule,
+  MatDividerModule,
+  MatCardModule
+
   
 ]
 

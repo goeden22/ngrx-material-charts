@@ -1,10 +1,21 @@
 .bars{
-    &__value{
+    &__name{
         position: absolute;
-        bottom: -20px;
+        bottom: -25px;
         margin:0;
     }
+        &__value{
+            position: absolute;
+            margin:0;
+            top: -20px;
+            width: 100%;
+            text-align: center;
+        }
+    
     &__bar{
         transition: height 500ms;
+        width: 25px;
+        position: relative;
+        cursor: pointer;
     }
 }

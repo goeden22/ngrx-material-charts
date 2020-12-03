@@ -1,5 +1,5 @@
 table{
-    width: 500px;
+    width: 100%;
 }
 .table{
     &__colorSample{
@@ -17,4 +17,9 @@ table{
             background-color: #EEFEFE
         }
     }
+    &__container{
+        max-height: 270px;
+        overflow: auto;
+    }
+    
 }

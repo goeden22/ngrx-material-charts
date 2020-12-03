@@ -1,15 +1,28 @@
-<div class="div">
-  <app-charts [entries]=entries [sum]=sum></app-charts>
-  <app-bars class="bars__wrap" [entries]=entries [sum]=sum></app-bars>
-  <app-charts-table [dataSource]=entries></app-charts-table>
-<!--<li *ngFor="let entry of entries">
+<div class="wrap">
+  <div class="app mat-elevation-z3">
+    <div class="app__header">
+    <h3>ngrx charts.</h3> <button mat-icon-button>
+        <mat-icon>help</mat-icon>
+      </button>
+    </div>
+
+    <app-charts class="charts" [entries]=entries [sum]=sum></app-charts>
+
+
+    <app-bars class="bars__wrap" [entries]=entries [sum]=sum>
+
+    </app-bars>
+ 
+
+    <app-charts-table class="table" [dataSource]=entries></app-charts-table>
+    <!--<li *ngFor="let entry of entries">
   
   <h3>{{entry.name}}</h3>
   <h5>{{entry.value}}</h5>
   <button mat-button (click)="deleteEntry(entry.id)">x</button>
 </li> -->
-<button mat-raised-button (click)="openAddDialog()" color="primary">Add Entry</button>
+    <button mat-raised-button (click)="openAddDialog()" color="primary" class="mv-15">Add Entry</button>
 
 
+  </div>
 </div>
-  
